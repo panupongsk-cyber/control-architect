@@ -59,7 +59,7 @@ const DEFENSE_LAYER = {
   ACTIVITY_LOG: {
     id: "ACTIVITY_LOG",
     label: { th: "ข้อมูลเหตุการณ์ (activity log)", en: "Activity logging" },
-    tag: "ENABLE_RECOVERY",
+    tag: "LIMIT_IMPACT",
   },
   DATA_RECOVERY_PLAN: {
     id: "DATA_RECOVERY_PLAN",
@@ -73,9 +73,9 @@ const DEFENSE_LAYER_MIN_TAG_SPREAD = 2;
 
 const CLAUSE_CONCEPT = {
   RBAC_ROLE_ASSIGNMENT: { th: "RBAC: กำหนดสิทธิ์ตามบทบาทงาน", en: "RBAC: permissions tied to a job role" },
-  OBJECT_LEVEL_CONDITION: {
-    th: "เงื่อนไขระดับ object เกินกว่า RBAC เฉย ๆ",
-    en: "An object-level condition beyond plain RBAC",
+  ABAC: {
+    th: "ABAC: เงื่อนไขระดับ object เกินกว่า RBAC เฉย ๆ",
+    en: "ABAC: an object-level condition beyond plain RBAC",
   },
   SEPARATION_OF_DUTIES: { th: "Separation of duties", en: "Separation of duties" },
   DAC: { th: "DAC: เจ้าของทรัพยากรให้สิทธิ์เอง", en: "DAC: the resource owner grants access" },
@@ -347,7 +347,7 @@ const STAGE4_POLICY_CLAUSES = [
           th: "ผู้สอนแก้ผลได้เฉพาะรายวิชาที่ตนรับผิดชอบ",
           en: "An instructor may edit grades only for the course they are responsible for.",
         },
-        correctConcept: "OBJECT_LEVEL_CONDITION",
+        correctConcept: "ABAC",
       },
       {
         id: "C2",
@@ -381,7 +381,7 @@ const STAGE4_POLICY_CLAUSES = [
           th: "ผู้ช่วยสอนอนุมัติการยืมอุปกรณ์ได้เฉพาะของรายวิชาที่ตนดูแล",
           en: "A teaching assistant may approve equipment loans only for the course they oversee.",
         },
-        correctConcept: "OBJECT_LEVEL_CONDITION",
+        correctConcept: "ABAC",
       },
       {
         id: "C2",

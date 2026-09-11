@@ -80,8 +80,8 @@ try {
   console.log("Test 5: Verifying Stage 3 defense-stack scoring and the single-point-of-failure rule...");
   const tooFew = evaluateStage3Layers(["AUTHENTICATION", "RESOURCE_AUTHZ_POLICY"]);
   assert.strictEqual(tooFew.singlePointOfFailure, true, `Fewer than ${DEFENSE_LAYER_MIN_COUNT} layers must be flagged.`);
-  const sameDimension = evaluateStage3Layers(["RESOURCE_AUTHZ_POLICY", "JOINT_APPROVAL", "ACTIVITY_LOG"]);
-  // RESOURCE_AUTHZ_POLICY and JOINT_APPROVAL are both LIMIT_IMPACT; ACTIVITY_LOG is ENABLE_RECOVERY -> 2 dimensions, should pass
+  const sameDimension = evaluateStage3Layers(["RESOURCE_AUTHZ_POLICY", "JOINT_APPROVAL", "DATA_RECOVERY_PLAN"]);
+  // RESOURCE_AUTHZ_POLICY and JOINT_APPROVAL are both LIMIT_IMPACT; DATA_RECOVERY_PLAN is ENABLE_RECOVERY -> 2 dimensions, should pass
   assert.strictEqual(sameDimension.singlePointOfFailure, false, "Three layers spanning 2 distinct dimensions should not be flagged.");
   const allSameDimension = evaluateStage3Layers(["RESOURCE_AUTHZ_POLICY", "JOINT_APPROVAL"]);
   assert.strictEqual(allSameDimension.singlePointOfFailure, true, "Two layers is already below the minimum count regardless of dimension spread.");
@@ -103,7 +103,7 @@ try {
   const correctTo = s3item.tradeoffOptions.find((t) => t.correct);
   const s3Good = scoreStage3(s3item, {
     layerIds: ["AUTHENTICATION", "RESOURCE_AUTHZ_POLICY", "ACTIVITY_LOG"],
-    tags: { AUTHENTICATION: "REDUCE_LIKELIHOOD", RESOURCE_AUTHZ_POLICY: "LIMIT_IMPACT", ACTIVITY_LOG: "ENABLE_RECOVERY" },
+    tags: { AUTHENTICATION: "REDUCE_LIKELIHOOD", RESOURCE_AUTHZ_POLICY: "LIMIT_IMPACT", ACTIVITY_LOG: "LIMIT_IMPACT" },
     residualRiskId: correctRisk.id,
     tradeoffId: correctTo.id,
   });

@@ -13,15 +13,17 @@ Requirements) of 305331/316331 Computer and Information Security.
 | MLO4.1 | Explain and match a security design principle to a risk | Stage 1: Design Principles |
 | MLO4.2 | Classify a control by its function and technical/administrative/physical nature | Stage 2: Control Sort |
 | MLO4.3 | Select a defense-in-depth control set, with trade-offs and residual risk | Stage 3: Layer Builder |
-| MLO4.4 | Analyze resource protection using DAC, RBAC, MAC, least privilege, and separation of duties | Stage 4: Access Model |
+| MLO4.4 | Analyze resource protection using DAC, RBAC, MAC, ABAC, least privilege, and separation of duties | Stage 4: Access Model |
 | MLO4.5 | Turn a risk into a testable security requirement, and gauge what a standard can and cannot do | Stage 5: Requirement Builder |
 
-All scenarios are synthetic and reuse the Student Project Portal case from the approved chapter
+Most scenarios are synthetic and reuse the Student Project Portal case from the approved chapter
 source (`textbook/lecture-notes/chapter-04/00-chapter.md`) — the grade-editing risk, the lost
 submission file, the "is MFA alone enough" case, the course access policy, and the vague-requirement
 rewrite are the chapter's own worked examples, not new inventions. Stage 2's four items are the
 chapter's own `ตรวจความเข้าใจ 4.2` exercise items, and Stage 4's clauses are its `ตรวจความเข้าใจ 4.4`
-policy text verbatim (translated for the English toggle).
+policy text verbatim (translated for the English toggle). Stage 3's bank-account/research-grant
+item (S3-2) is a synthetic elaboration of the chapter's defense-in-depth concepts rather than a
+chapter example — the chapter itself never discusses banking or financial payouts.
 
 ---
 
@@ -59,9 +61,9 @@ single-point-of-failure rule above applies before any partial credit is computed
 
 ### Stage 4: Access Model (2 items)
 Each policy is split into 3 clauses. Tag every clause with the access-control concept it actually
-demonstrates (RBAC role assignment / an object-level condition beyond RBAC / separation of duties),
-with DAC and MAC always offered as plausible-looking distractors to check that students can tell the
-three access-control models apart.
+demonstrates (RBAC role assignment / ABAC — an object-level condition beyond RBAC / separation of
+duties), with DAC and MAC always offered as plausible-looking distractors to check that students can
+tell the four access-control models apart.
 
 ### Stage 5: Requirement Builder (2 items)
 Given a vague requirement ("the system must protect student data well"), fill in the chapter's own
