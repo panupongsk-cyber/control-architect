@@ -509,16 +509,6 @@ const STANDARD_ROLE_OPTIONS = [
 // Scoring
 // ---------------------------------------------------------------------------
 
-/** Same speed-bonus formula used across the other 305331 games. */
-function calculateScore(basePoints, timeElapsedSeconds, maxTimeSeconds = 45) {
-  if (timeElapsedSeconds >= maxTimeSeconds) {
-    return Math.floor(basePoints * 0.5);
-  }
-  const speedRatio = (maxTimeSeconds - timeElapsedSeconds) / maxTimeSeconds;
-  const speedBonus = Math.floor(basePoints * 0.5 * speedRatio);
-  return basePoints + speedBonus;
-}
-
 function scoreStage1(item, answer) {
   const selected = Array.isArray(answer.principles) ? answer.principles : [];
   const correctSet = item.correctPair;
@@ -623,38 +613,38 @@ function evaluateLearningOutcome(stageAccuracies) {
 
   let rank = {
     badge: "📐",
-    title: { th: "ผู้ฝึกหัดออกแบบระบบควบคุม", en: "Control Architect Apprentice" },
+    title: { th: "ช่วงผลการฝึก: ต่ำกว่า 50%", en: "Practice band: below 50%" },
     description: {
-      th: "เริ่มต้นได้ดี ลองเล่นซ้ำเพื่อฝึกแยกหลักการ ประเภท control และ requirement ให้คล่องขึ้น",
-      en: "A solid start — replay to get faster at separating principles, control types, and requirements.",
+      th: "ผลนี้สะท้อนความถูกต้องในชุดสถานการณ์ฝึกนี้เท่านั้น ลองเล่นซ้ำเพื่อฝึกแยกหลักการ ประเภท control และ requirement ให้ชัดเจนขึ้น",
+      en: "This result reflects accuracy in this local scenario set only; replay to practise distinguishing security principles, control types, and requirements.",
     },
   };
 
   if (overallAccuracy >= 90) {
     rank = {
       badge: "🏛️",
-      title: { th: "หัวหน้าสถาปนิกระบบควบคุม", en: "Chief Control Architect" },
+      title: { th: "ช่วงผลการฝึก: 90–100%", en: "Practice band: 90–100%" },
       description: {
-        th: "เลือกหลักการ จัดประเภท control ประกอบ defense in depth และเขียน requirement ได้แม่นยำและมีเหตุผลรองรับครบ",
-        en: "Selects principles, classifies controls, builds layered defenses, and writes requirements accurately, with full reasoning.",
+        th: "ความถูกต้องสูงในชุดสถานการณ์ฝึกนี้ โดยยังไม่ใช่การรับรองความสามารถในการปฏิบัติงานจริง",
+        en: "High accuracy in this local scenario set; it does not certify operational competence.",
       },
     };
   } else if (overallAccuracy >= 75) {
     rank = {
       badge: "🧱",
-      title: { th: "วิศวกรระบบควบคุมอาวุโส", en: "Senior Control Engineer" },
+      title: { th: "ช่วงผลการฝึก: 75–89%", en: "Practice band: 75–89%" },
       description: {
-        th: "ออกแบบชุด control ได้ถูกต้องเป็นส่วนใหญ่ ยังพลาดบ้างในรายละเอียดของ trade-off หรือเงื่อนไข",
-        en: "Designs control sets correctly most of the time, with a few slips on trade-off or condition details.",
+        th: "ความถูกต้องดีในชุดสถานการณ์ฝึกนี้ ลองทบทวน trade-off และเงื่อนไขในข้อกำหนด",
+        en: "Good accuracy in this local scenario set; review trade-offs and conditions in the requirements.",
       },
     };
   } else if (overallAccuracy >= 50) {
     rank = {
       badge: "🔧",
-      title: { th: "วิศวกรระบบควบคุม", en: "Control Engineer" },
+      title: { th: "ช่วงผลการฝึก: 50–74%", en: "Practice band: 50–74%" },
       description: {
-        th: "เข้าใจหลักการพื้นฐาน แต่ยังสับสนระหว่างการจัดหมวด control กับการเลือก access model",
-        en: "Grasps the basics, but still mixes up classifying controls with choosing an access model.",
+        th: "มีความเข้าใจพื้นฐานในชุดสถานการณ์ฝึกนี้ ลองทบทวนความต่างระหว่างการจัดหมวด control กับการเลือก access model",
+        en: "Some basic understanding in this local scenario set; review the difference between classifying controls and choosing an access model.",
       },
     };
   }
@@ -678,7 +668,6 @@ if (typeof module !== "undefined" && module.exports) {
     STAGE4_POLICY_CLAUSES,
     STAGE5_REQUIREMENTS,
     STANDARD_ROLE_OPTIONS,
-    calculateScore,
     scoreStage1,
     setScore,
     scoreStage2Item,
